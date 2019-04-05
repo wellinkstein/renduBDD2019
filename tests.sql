@@ -8,10 +8,15 @@
 
 CREATE OR REPLACE PROCEDURE test_ctrInterPhotoInv as
     VPho NUMBER;
+    VInter NUMBER;
 BEGIN
     INSERT INTO Photometre VALUES (1, 0.20, 1, 'modele', to_date('01-01-2010'));
     SELECT SEQUENCE_16.currval into VPho FROM dual;
     INSERT INTO Intervention VALUES (1, Vpho, TO_DATE('25/03/2019'), 'societe');
+    SELECT SEQUENCE_17.curral into VInter FROM dual;
+    DELETE FROM Intervention WHERE IdIntervention = VInter;
+    DELETE FROM Photometre WHERE IdPhotometre = VPho;
+    
 END;
 /
 commit;
@@ -24,10 +29,15 @@ commit;
 
 CREATE OR REPLACE PROCEDURE test_ctrInterPhotoVal as
     VPho NUMBER;
+    VInter NUMBER;
 BEGIN
     INSERT INTO Photometre VALUES (1, 0.20, 0, 'modele', to_date('01-01-2010'));
     SELECT SEQUENCE_16.currval into VPho FROM dual;
     INSERT INTO Intervention VALUES (1, Vpho, TO_DATE('25/03/2019'), 'societe');
+    SELECT SEQUENCE_17.curral into VInter FROM dual;
+    DELETE FROM Intervention WHERE IdIntervention = VInter;
+    DELETE FROM Photometre WHERE IdPhotometre = VPho;
+    
 END;
 /
 commit;
@@ -41,8 +51,11 @@ commit;
 -- test déclenchement
 
 CREATE OR REPLACE PROCEDURE test_ctrReactifCouleurInv AS
+    VPho NUMBER;
 BEGIN
     INSERT INTO Reactif (IdReactif, typeReactif, couleurVivantes, couleurMortes) Values (2, 'opacimétrique', 1, 1);
+    SELECT SEQUENCE_16.currval into VPho FROM dual;
+    DELETE FROM Photometre WHERE IdPhotometre = VPho;
 END;
 /
 commit;
@@ -54,8 +67,11 @@ commit;
 -- test non déclenchement
 
 CREATE OR REPLACE PROCEDURE test_ctrReactifCouleurVal AS
+    VPho NUMBER;
 BEGIN
     INSERT INTO Reactif (IdReactif, typeReactif) Values (3, 'opacimétrique');
+    SELECT SEQUENCE_16.currval into VPho FROM dual;
+    DELETE FROM Photometre WHERE IdPhotometre = VPho;
 end;
 /
 commit;
@@ -118,6 +134,20 @@ BEGIN
     
     INSERT INTO Photo VALUES (1, VPhotom, VPla, to_date('27/03/2019'));
     SELECT SEQUENCE_12.currval into VPhoto from dual;
+    
+    DELETE FROM Photo WHERE IdPhoto = VPhoto;
+    DELETE FROM Photometre WHERE IdPhotometre = VPhotom;
+    DELETE FROM Slot WHERE IdSlot = VSlo;
+    DELETE FROM Uplet WHERE IdUplet = VUpl;
+    DELETE FROM Plaque WHERE IdPlaque = VPla;
+    DELETE FROM Experience WHERE IdExperience = VExp;
+    DELETE FROM Reactif WHERE IdReactif = VRea1;
+    DELETE FROM Chercheur WHERE IdChercheur = VChe;
+    DELETE FROM Laborantin WHERE IdLaborantin = VLab;
+    DELETE FROM Equipe WHERE IdEquipe = VEq;
+    DELETE FROM Utilisateur WHERE IdUtilisateur = VU2;
+    DELETE FROM Utilisateur WHERE IdUtilisateur = VU1;
+    
 END;
 /
 commit;
@@ -179,6 +209,19 @@ BEGIN
     INSERT INTO Photo VALUES (1, VPhotom, VPla, to_date('24/03/2019'));
     SELECT SEQUENCE_12.currval into VPhoto from dual;
 
+    DELETE FROM Photo WHERE IdPhoto = VPhoto;
+    DELETE FROM Photometre WHERE IdPhotometre = VPhotom;
+    DELETE FROM Slot WHERE IdSlot = VSlo;
+    DELETE FROM Uplet WHERE IdUplet = VUpl;
+    DELETE FROM Plaque WHERE IdPlaque = VPla;
+    DELETE FROM Experience WHERE IdExperience = VExp;
+    DELETE FROM Reactif WHERE IdReactif = VRea1;
+    DELETE FROM Chercheur WHERE IdChercheur = VChe;
+    DELETE FROM Laborantin WHERE IdLaborantin = VLab;
+    DELETE FROM Equipe WHERE IdEquipe = VEq;
+    DELETE FROM Utilisateur WHERE IdUtilisateur = VU2;
+    DELETE FROM Utilisateur WHERE IdUtilisateur = VU1;
+    
 END;
 /
 commit;
@@ -204,6 +247,7 @@ CREATE OR REPLACE PROCEDURE test_ctrDateAntPhotoInv AS
     VUpl NUMBER;
     VSlo NUMBER;
     VPhotom NUMBER;
+    VVal NUMBER;
 BEGIN
 
     INSERT INTO Utilisateur values (1, 'U1', 'mdpU1', 'Laborantin');
@@ -243,6 +287,22 @@ BEGIN
     SELECT SEQUENCE_12.currval into VPhoto from dual;
     
     INSERT INTO Validation (IdValidation, IdExperience, dateValidation) values (1,VExp,to_date('24/03/2019'));
+    SELECT SEQUENCE_9.currval into VVal from dual;
+    
+    DELETE FROM Validation WHERE IdValidation = VVal;
+    DELETE FROM Photo WHERE IdPhoto = VPhoto;
+    DELETE FROM Photometre WHERE IdPhotometre = VPhotom;
+    DELETE FROM Slot WHERE IdSlot = VSlo;
+    DELETE FROM Uplet WHERE IdUplet = VUpl;
+    DELETE FROM Plaque WHERE IdPlaque = VPla;
+    DELETE FROM Experience WHERE IdExperience = VExp;
+    DELETE FROM Reactif WHERE IdReactif = VRea1;
+    DELETE FROM Chercheur WHERE IdChercheur = VChe;
+    DELETE FROM Laborantin WHERE IdLaborantin = VLab;
+    DELETE FROM Equipe WHERE IdEquipe = VEq;
+    DELETE FROM Utilisateur WHERE IdUtilisateur = VU2;
+    DELETE FROM Utilisateur WHERE IdUtilisateur = VU1;
+    
 END;
 /
 commit;
@@ -266,6 +326,7 @@ CREATE OR REPLACE PROCEDURE test_ctrDateAntPhotoVal AS
     VUpl NUMBER;
     VSlo NUMBER;
     VPhotom NUMBER;
+    VVal NUMBER;
 BEGIN
 
     INSERT INTO Utilisateur values (1, 'U1', 'mdpU1', 'Laborantin');
@@ -305,6 +366,23 @@ BEGIN
     SELECT SEQUENCE_12.currval into VPhoto from dual;
     
     INSERT INTO Validation (IdValidation, IdExperience, dateValidation) values (1,VExp,to_date('28/03/2019'));
+    SELECT SEQUENCE_9.currval into VVal from dual;
+    
+    DELETE FROM Validation WHERE IdValidation = VVal;
+    DELETE FROM Photo WHERE IdPhoto = VPhoto;
+    DELETE FROM Photometre WHERE IdPhotometre = VPhotom;
+    DELETE FROM Slot WHERE IdSlot = VSlo;
+    DELETE FROM Uplet WHERE IdUplet = VUpl;
+    DELETE FROM Plaque WHERE IdPlaque = VPla;
+    DELETE FROM Experience WHERE IdExperience = VExp;
+    DELETE FROM Reactif WHERE IdReactif = VRea1;
+    DELETE FROM Chercheur WHERE IdChercheur = VChe;
+    DELETE FROM Laborantin WHERE IdLaborantin = VLab;
+    DELETE FROM Equipe WHERE IdEquipe = VEq;
+    DELETE FROM Utilisateur WHERE IdUtilisateur = VU2;
+    DELETE FROM Utilisateur WHERE IdUtilisateur = VU1;
+    
+    
 END;
 /
 commit;
@@ -320,6 +398,7 @@ commit;
 CREATE OR REPLACE PROCEDURE test_ctrPhotoOpeInv AS
     VPhotom NUMBER;
     VPlaque NUMBER;
+    VPho NUMBER;
 BEGIN
     INSERT INTO Photometre VALUES (1, 1.0, 0, 'mod1', to_date('01-01-2010'));
     SELECT SEQUENCE_16.currval INTO VPhotom from dual;
@@ -328,6 +407,12 @@ BEGIN
     SELECT SEQUENCE_11.currval INTO Vplaque from dual;
     
     INSERT INTO Photo (IdPhoto, IdPhotometre, IdPlaque) values (1, VPhotom, VPlaque);
+    SELECT SEQUENCE_12.currval INTO VPho from dual;
+    
+    DELETE FROM Photo WHERE IdPhoto = VPho;
+    DELETE FROM Plaque WHERE IdPlaque = VPlaque;
+    DELETE FROM Photometre WHERE IdPhotometre = VPhotom;
+    
 END;
 /
 COMMIT;
@@ -341,6 +426,7 @@ commit;
 CREATE OR REPLACE PROCEDURE test_ctrPhotoOpeVal AS
     VPhotom NUMBER;
     VPlaque NUMBER;
+    VPho NUMBER;
 BEGIN
     INSERT INTO Photometre VALUES (1, 1.0, 1, 'mod1', to_date('01-01-2010'));
     SELECT SEQUENCE_16.currval INTO VPhotom from dual;
@@ -349,6 +435,12 @@ BEGIN
     SELECT SEQUENCE_11.currval INTO Vplaque from dual;
     
     INSERT INTO Photo (IdPhoto, IdPhotometre, IdPlaque) values (1, VPhotom, VPlaque);
+    SELECT SEQUENCE_12.currval INTO VPho from dual;
+    
+    DELETE FROM Photo WHERE IdPhoto = VPho;
+    DELETE FROM Plaque WHERE IdPlaque = VPlaque;
+    DELETE FROM Photometre WHERE IdPhotometre = VPhotom;
+    
 END;
 /
 COMMIT;
@@ -374,6 +466,7 @@ CREATE OR REPLACE PROCEDURE test_ctrDateResultSlotInv AS
     VUpl NUMBER;
     VSlo NUMBER;
     VPhotom NUMBER;
+    VRes NUMBER;
 BEGIN
 
     INSERT INTO Utilisateur values (1, 'U1', 'mdpU1', 'Laborantin');
@@ -413,6 +506,22 @@ BEGIN
     SELECT SEQUENCE_12.currval into VPhoto from dual;
     
     INSERT INTO Resultats_slot (IdResultatSlot, IdSlot, IdPhoto, dateAnalyse) VALUES (1, VSlo, VPhoto, to_date('26/03/2019'));
+    SELECT SEQUENCE_1.currval into VRes from dual;
+    
+    DELETE FROM Resultats_slot WHERE IdValidation = VVal;
+    DELETE FROM Photo WHERE IdPhoto = VPhoto;
+    DELETE FROM Photometre WHERE IdPhotometre = VPhotom;
+    DELETE FROM Slot WHERE IdSlot = VSlo;
+    DELETE FROM Uplet WHERE IdUplet = VUpl;
+    DELETE FROM Plaque WHERE IdPlaque = VPla;
+    DELETE FROM Experience WHERE IdExperience = VExp;
+    DELETE FROM Reactif WHERE IdReactif = VRea1;
+    DELETE FROM Chercheur WHERE IdChercheur = VChe;
+    DELETE FROM Laborantin WHERE IdLaborantin = VLab;
+    DELETE FROM Equipe WHERE IdEquipe = VEq;
+    DELETE FROM Utilisateur WHERE IdUtilisateur = VU2;
+    DELETE FROM Utilisateur WHERE IdUtilisateur = VU1;
+
 
 END;
 /
@@ -437,6 +546,7 @@ CREATE OR REPLACE PROCEDURE test_ctrDateResultSlotVal AS
     VUpl NUMBER;
     VSlo NUMBER;
     VPhotom NUMBER;
+    VRes NUMBER;
 BEGIN
 
     INSERT INTO Utilisateur values (1, 'U1', 'mdpU1', 'Laborantin');
@@ -476,6 +586,21 @@ BEGIN
     SELECT SEQUENCE_12.currval into VPhoto from dual;
     
     INSERT INTO Resultats_slot (IdResultatSlot, IdSlot, IdPhoto, dateAnalyse) VALUES (1, VSlo, VPhoto, to_date('28/03/2019'));
+    SELECT SEQUENCE_1.currval into VRes from dual;
+    
+    DELETE FROM Resultats_slot WHERE IdValidation = VVal;
+    DELETE FROM Photo WHERE IdPhoto = VPhoto;
+    DELETE FROM Photometre WHERE IdPhotometre = VPhotom;
+    DELETE FROM Slot WHERE IdSlot = VSlo;
+    DELETE FROM Uplet WHERE IdUplet = VUpl;
+    DELETE FROM Plaque WHERE IdPlaque = VPla;
+    DELETE FROM Experience WHERE IdExperience = VExp;
+    DELETE FROM Reactif WHERE IdReactif = VRea1;
+    DELETE FROM Chercheur WHERE IdChercheur = VChe;
+    DELETE FROM Laborantin WHERE IdLaborantin = VLab;
+    DELETE FROM Equipe WHERE IdEquipe = VEq;
+    DELETE FROM Utilisateur WHERE IdUtilisateur = VU2;
+    DELETE FROM Utilisateur WHERE IdUtilisateur = VU1;
 
 END;
 /
@@ -532,6 +657,17 @@ BEGIN
     FOR i IN 1..97 LOOP
         INSERT INTO Slot (IDSlot, IdUplet, IdPlaque) values (1, VUpl, VPla);
     END LOOP;
+    
+    DELETE FROM Slot WHERE IdUplet = VUpl AND IDPlaque = VPla;
+    DELETE FROM Uplet WHERE IdUplet = VUpl;
+    DELETE FROM Plaque WHERE IdPlaque = VPla;
+    DELETE FROM Experience WHERE IdExperience = VExp;
+    DELETE FROM Reactif WHERE IdReactif = VRea1;
+    DELETE FROM Chercheur WHERE IdChercheur = VChe;
+    DELETE FROM Laborantin WHERE IdLaborantin = VLab;
+    DELETE FROM Equipe WHERE IdEquipe = VEq;
+    DELETE FROM Utilisateur WHERE IdUtilisateur = VU1;
+    DELETE FROM Utilisateur WHERE IdUtilisateur = VU2;
 END;
 /
 COMMIT;
@@ -585,6 +721,17 @@ BEGIN
     FOR i IN 1..96 LOOP
         INSERT INTO Slot (IDSlot, IdUplet, IdPlaque) values (1, VUpl, VPla);
     END LOOP;
+    
+    DELETE FROM Slot WHERE IdUplet = VUpl AND IDPlaque = VPla;
+    DELETE FROM Uplet WHERE IdUplet = VUpl;
+    DELETE FROM Plaque WHERE IdPlaque = VPla;
+    DELETE FROM Experience WHERE IdExperience = VExp;
+    DELETE FROM Reactif WHERE IdReactif = VRea1;
+    DELETE FROM Chercheur WHERE IdChercheur = VChe;
+    DELETE FROM Laborantin WHERE IdLaborantin = VLab;
+    DELETE FROM Equipe WHERE IdEquipe = VEq;
+    DELETE FROM Utilisateur WHERE IdUtilisateur = VU1;
+    DELETE FROM Utilisateur WHERE IdUtilisateur = VU2;
 END;
 /
 COMMIT;
@@ -593,20 +740,4 @@ call test_ctrNbSlotUpletVal();
 /
 commit;
 
--- Après une intervention sur un photomète, le statut du photomètre passe à opérationnel.
 
-CREATE OR REPLACE PROCEDURE test_ctrStatutPhotometre AS
-    VPhotom NUMBER;
-BEGIN
-    
-    INSERT INTO Photometre (IdPhotometre, operationnel) VALUES (1, 0);
-    SELECT SEQUENCE_16.currval INTO VPhotom FROM dual;
-    
-    INSERT INTO Intervention (IdIntervention, IdPhotometre) VALUES (1, VPhotom);
-END;
-/
-COMMIT;
-
-CALL test_ctrStatutPhotometre();
-/
-COMMIT; 

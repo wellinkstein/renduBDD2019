@@ -232,4 +232,20 @@ END;
 /
 COMMIT;
 
+-- Après une intervention sur un photomète, le statut du photomètre passe à opérationnel.
 
+CREATE OR REPLACE PROCEDURE test_ctrStatutPhotometre AS
+    VPhotom NUMBER;
+BEGIN
+    
+    INSERT INTO Photometre (IdPhotometre, operationnel) VALUES (1, 0);
+    SELECT SEQUENCE_16.currval INTO VPhotom FROM dual;
+    
+    INSERT INTO Intervention (IdIntervention, IdPhotometre) VALUES (1, VPhotom);
+END;
+/
+COMMIT;
+
+CALL test_ctrStatutPhotometre();
+/
+COMMIT; 
