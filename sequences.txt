@@ -1,0 +1,17 @@
+IdValidation -> SEQUENCE_9
+IdUtilisateur -> SEQUENCE_5
+IdUplet -> SEQUENCE_10
+IdSlot -> SEQUENCE_13
+IdResultatSlot -> SEQUENCE_1
+IdReactif -> SEQUENCE_14
+IdPlaque -> SEQUENCE_11
+IdPhotometre -> SEQUENCE_16
+IdPhoto -> SEQUENCE_12
+IdLaborantin -> SEQUENCE_3
+IdIntervention -> SEQUENCE_17
+IdIntervenant -> SEQUENCE_15
+IdFacture -> SEQUENCE_7
+IdExperience -> SEQUENCE_2
+IdEquipe -> SEQUENCE_8
+IdChercheur -> SEQUENCE_6
+IdAction -> SEQUENCE_4
