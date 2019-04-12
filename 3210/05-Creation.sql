@@ -886,6 +886,7 @@ create table PLAQUE
 (
    IDPLAQUE             INTEGER              not null,
    NBSLOT               INTEGER,
+   COUTPLAQUE			FLOAT,
    constraint PK_PLAQUE primary key (IDPLAQUE)
 )
 /
@@ -902,7 +903,6 @@ create table REACTIF
    COULEURMORTES        FLOAT,
    FOURNISSEURREACTIF   VARCHAR2(1024),
    PRIXREACTIF          FLOAT,
-   VOLUMEREACTIF        FLOAT,
    constraint PK_REACTIF primary key (IDREACTIF)
 )
 /
